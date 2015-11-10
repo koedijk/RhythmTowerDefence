@@ -1,0 +1,4 @@
+- .Gif van Proof of Concept werkend op BPM
+- Zeggen dat we het willen uitbreiden op rustige & drukke stukken binnen de muziek
+- Detectie van de aanslagen die currency opleveren
+- Upgrades
