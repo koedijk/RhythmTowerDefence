@@ -4,13 +4,13 @@ using System.Collections;
 public class TowerTarget : MonoBehaviour {
 
 
-	private Vector2 Center;
-	private float Radius = 3;
-	private int layermask;
+	private Vector2 Center; //Center waarvandaan de Radius wordt berekend
+	public float Radius = 5; //Lengte van afstand waarbinnen de tower objecten ziet
+	private int layermask; 
 	
 	void Start(){
 		Center = new Vector2(0,0); //Midden van de toren, niet aanraken
-		layermask = LayerMask.GetMask ("1"); //Alle Layers die aangevallen worden, staan hier
+		layermask = LayerMask.GetMask ("1", "2"); //Alle Layers die aangevallen worden, staan hier
 	}
 
 	void Update () {
@@ -31,10 +31,11 @@ public class TowerTarget : MonoBehaviour {
 		Gizmos.color = Color.white;
 		Gizmos.DrawWireSphere(transform.position, Radius);
 	}
-
+	/*
 	private void LineRenderPrep(){ // Linerenderer voor lasers (Nog niet af)
 		LineRenderer.SetColors = Color.red;
 		LineRenderer.isVisible = 0;
 
 	}
+	 */
 }
