@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TowerTarget : MonoBehaviour {
+public class TowerBehaviour : MonoBehaviour {
 
 
 	private Vector2 Center; //Center waarvandaan de Radius wordt berekend
@@ -10,7 +10,7 @@ public class TowerTarget : MonoBehaviour {
 	
 	void Start(){
 		Center = new Vector2(0,0); //Midden van de toren, niet aanraken
-		layermask = LayerMask.GetMask ("1", "2"); //Alle Layers die aangevallen worden, staan hier
+		layermask = LayerMask.GetMask ("1", "2"); //Alle Layers die aangevallen kunnen worden staan hier
 	}
 
 	void Update () {
