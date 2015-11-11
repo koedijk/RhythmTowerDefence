@@ -21,7 +21,7 @@ public class TowerBehaviour : MonoBehaviour {
 		Collider2D col = Physics2D.OverlapCircle(Center, Radius, /*layers*/ layermask); // Laat de toren kijken of er enemies in zijn bereik zijn en op welke layer ze zitten
 
 		if (col){
-			Debug.Log(col); //Debug logged als een enemy in het bereik van deze toren is.
+			//Debug.Log(col); //Debug logged als een enemy in het bereik van deze toren is.
 			//Shoot
 
 		}

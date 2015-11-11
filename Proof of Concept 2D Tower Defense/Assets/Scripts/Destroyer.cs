@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Destroyer : MonoBehaviour {
 
-	void OnTriggerEnter2D(Collider2D other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
 
 		if (other.gameObject.transform.parent) {
