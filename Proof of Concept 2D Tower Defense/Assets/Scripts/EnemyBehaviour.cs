@@ -2,8 +2,11 @@
 using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour {
-	[SerializeField]
-	private float walkSpeed;
+    [SerializeField]
+    private float walkSpeed;
+    private int health = 0; //deze nog veranderen
+    private int fireRate = 1; // Deze moet nog veranderd worden als zowel toren als enemy kunnen schieten
+    // Damage moet nog ingevoerd worden.
 
 	// Update is called once per frame
 	void Update () {

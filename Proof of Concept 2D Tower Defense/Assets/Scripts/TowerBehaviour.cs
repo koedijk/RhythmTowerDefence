@@ -4,13 +4,15 @@ using System.Collections;
 public class TowerBehaviour : MonoBehaviour {
 	[SerializeField]
 	private Transform sightStart, sightGunPoint,sightEnd;
-	private bool spotted = false;
 	private Vector2 Center; //Center waarvandaan de Radius wordt berekend
 	public float Radius = 5; //Lengte van afstand waarbinnen de tower objecten ziet
 	private int layermask;
-	private bool Shooting = false;
+    private bool Shooting = false;
+    private bool spotted = false;
+    private int health = 0; //Deze nog veranderen(moet ook nog een healthbar komen)
+    //Damage voor de base tower(upgrade parts krijgen hun eigen??)
 
-	void Awake(){
+    void Awake(){
 
 	}
 	void Start(){
@@ -34,7 +36,7 @@ public class TowerBehaviour : MonoBehaviour {
 				if(hit.collider)
 				{
 					Transform EnemyDetect = hit.collider.transform; // Positie van de enemy die in de Radius van de toren zit.
-					Debug.DrawRay(sightGunPoint.position,EnemyDetect.position,Color.cyan); // Lijn van de zo genaamde GunPoint.
+					Debug.DrawRay(sightGunPoint.position,EnemyDetect.position,Color.cyan); // Lijn van de zogenaamde GunPoint.
 				}
 
 			}

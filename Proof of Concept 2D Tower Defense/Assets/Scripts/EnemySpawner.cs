@@ -12,7 +12,10 @@ public class EnemySpawner : MonoBehaviour {
 
 	//We moeten hier nog de waves etc inbouwen.
 	//En changes maken zodat de spawners zich op ieder level/wave aanpassen
-	//Dit in eigen scripts neem ik aan?
+	//Script hiervoor is aangemaakt, nog kijken hoe we dat gaan doen verder.
+
+        //LaneManager moet nog komen, deze moet ervoor zorgen dat de gespawnde enemies een offset meekrijgen
+        //ik dacht om gewoon meerdere spawners te gebruiken, en de LevelWaveManager de spawners laten aansturen.
 
 
 	// Use this for initialization
