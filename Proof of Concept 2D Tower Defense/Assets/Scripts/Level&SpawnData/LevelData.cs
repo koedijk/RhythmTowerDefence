@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class LevelData : MonoBehaviour
 {
+	public int levelIndex;
+	public int waveIndex;
+
+
 	/*
 	class levelInfo{
 		public int levelAmount;
