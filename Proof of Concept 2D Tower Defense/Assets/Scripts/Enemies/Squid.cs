@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelWaveManager : MonoBehaviour {
-    //Dit script moet alle waves binnen levels aan gaan sturen
-
+public class Squid : EnemyBehaviour {
 
 	// Use this for initialization
 	void Start () {
