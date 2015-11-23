@@ -8,15 +8,6 @@ public class EnemySpawner : MonoBehaviour {
 	public float SpawnRateMin = 2; //Minimaal aantal seconden die de spawner moet wachten voordat er een nieuw object wordt gespawnd
 	[SerializeField]
 	public float SpawnRateMax = 2; //Maximaal aantal seconden die de spawner moet wachten voordat er een nieuw object wordt gespawnd
-	// Deze is nu nog even gelijk al min
-
-	//We moeten hier nog de waves etc inbouwen.
-	//En changes maken zodat de spawners zich op ieder level/wave aanpassen
-	//Script hiervoor is aangemaakt, nog kijken hoe we dat gaan doen verder.
-
-        //LaneManager moet nog komen, deze moet ervoor zorgen dat de gespawnde enemies een offset meekrijgen
-        //ik dacht om gewoon meerdere spawners te gebruiken, en de LevelWaveManager de spawners laten aansturen.
-
 
 	// Use this for initialization
 	void Start () {

@@ -14,8 +14,6 @@ public class NoteSpawner : MonoBehaviour {
 	[SerializeField]
 	private float BPS2; 
 
-	//Nieuwe BPS in de levels/waves inbouwen met "ActivateBPS" functies
-
 	// Use this for initialization
 	void Start () {
 		Spawn (); //Voert functie Spawn uit
