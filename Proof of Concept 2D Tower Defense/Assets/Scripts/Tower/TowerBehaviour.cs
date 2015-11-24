@@ -1,76 +1,115 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class TowerBehaviour : MonoBehaviour {
-	[SerializeField]
-	private Transform sightStart, sightGunPoint,sightEnd;
-	private Vector2 Center; //Center waarvandaan de Radius wordt berekend
-	public float Radius = 5; //Lengte van afstand waarbinnen de tower objecten ziet
-	private int layermask;
-    private bool Shooting = false;
-    private bool spotted = false;
-    private int health = 0; //Deze nog veranderen(moet ook nog een healthbar komen)
-    //Damage voor de base tower(upgrade parts krijgen hun eigen??)
-
-    void Awake(){
-
-	}
-	void Start(){
-		Center = new Vector2(0,0); //Midden van de toren, niet aanraken
-		layermask = LayerMask.GetMask ("1", "2"); //Alle Layers die aangevallen kunnen worden staan hier
-	}
-
-	void Update () {
-		//Raycasting();
-		RadiusCheck(); // Voert functie RadiusCheck iedere frame uit.
-	}
-
-	private void RadiusCheck(){
-		Collider2D col = Physics2D.OverlapCircle(Center, Radius, /*layers*/ layermask); // Laat de toren kijken of er enemies in zijn bereik zijn en op welke layer ze zitten
-
-		if (col){
-			if(Shooting == false)
-			{
-				RaycastHit2D hit = Physics2D.Raycast(sightStart.position,sightEnd.position,10,layermask);// Kijken of er iets de witte lijn raakt
-				Debug.DrawRay(sightStart.position,sightEnd.position); // De witte Lijn wanneer er collision is met col
-				if(hit.collider)
-				{
-					Transform EnemyDetect = hit.collider.transform; // Positie van de enemy die in de Radius van de toren zit.
-					Debug.DrawRay(sightGunPoint.position,EnemyDetect.position,Color.cyan); // Lijn van de zogenaamde GunPoint.
-				}
-
-			}
-
-		}
-	}
-
-	private void OnDrawGizmos(){ //Deze gizmo laat ons het bereik van onze torens zien, dit scheelt in testen.
-		Gizmos.color = Color.white;
-		Gizmos.DrawWireSphere(transform.position, Radius);
-	}
-	void Raycasting()
+public class TowerBehaviour : Lines
+{
+	//publics
+	public Bullet bullet;
+	public Transform GunPoint;
+	public float delayTime = 1f;
+	//privates
+	
+	//line
+	GameObject closestEnemyLine;
+	GameObject aimLine;
+	//enemy
+	EnemyBehaviour closestEnemy;
+	//time
+	private float delay;
+	void Start()
 	{
-		Debug.DrawRay(sightStart.position,sightEnd.position,Color.blue);
-		if(Shooting == false)
-		{
-				
-				RaycastHit2D hit = Physics2D.Raycast(sightStart.position,sightEnd.position,100,layermask);
-				//Transform EnemyDetect = hit.collider.transform;
-				//Debug.DrawRay(sightStart.position,EnemyDetect.position,Color.cyan);
-				if(hit.collider)
-				{
-					
-					
-					Shooting = true;
-				}
-				else{
-					Shooting = false;
-				}
-				
-		}
-
-
+		this.closestEnemy = this.findClosestEnemy();
+		this.closestEnemyLine = this.makeLine(Vector2.up, Color.red);
+		this.aimLine = this.makeLine(Vector2.up, Color.yellow);
+		delay = delayTime;
 	}
-
+	
+	void FixedUpdate()
+	{
+		//vind de dichts bij zijnde enemy
+		this.closestEnemy = this.findClosestEnemy();
+		//teken een lijn naar de closest enemy in rood
+		drawLineTo(this.closestEnemyLine, GunPoint.transform.position, closestEnemy.transform.position);
+		//bereken de projetile trajectory
+		Vector2 trajectory = calulateTrajectory();
+		if (delay < 0)
+		{
+			delay = delayTime;
+			this.Shoot(trajectory);
+		}
+		else
+		{
+			delay -= Time.fixedDeltaTime;
+		}
+	}
+	
+	void Shoot(Vector2 towards)
+	{
+		//maak nieuwe kogel
+		GameObject tempkogel = (GameObject)Instantiate(bullet.gameObject,GunPoint.transform.position , Quaternion.identity);
+		//reken de hoek uit
+		float angle = VectorMath.CartesianToPolar(towards).x;
+		//draai de kogel
+		tempkogel.transform.eulerAngles = new Vector3(0, 0, angle);
+	}
+	
+	Vector2 calulateTrajectory()
+	{
+		//haal de enemey positie op
+		Vector2 enemypos = this.closestEnemy.transform.position;
+		//reken de kogel snelheid uit
+		float bulletSpeed = bullet.Speed * Time.fixedDeltaTime;
+		//berekend de afstand van de enemy
+		//dit is a*a+b*b=c(dus pythagoras)
+		float enemyDist = Vector2.Distance(GunPoint.transform.position, enemypos);
+		//reken uit hoelang het duurt voor dat de kogel bij de enemy is
+		//time=distance/speed
+		float travelTime = enemyDist / bulletSpeed;
+		//neem de enemy zijn bewegings vector en vermenigvuldig die met de kogel traveltime
+		//positie + bewegings vector * travel time
+		Vector2 pre = enemypos + this.closestEnemy.bewegingsVector * travelTime;
+		
+		//doe de zelfde berekening maar dan met de nieuwe positie
+		enemyDist = Vector2.Distance(GunPoint.transform.position, pre);
+		//reken de nieuwe adstand uit
+		travelTime = enemyDist / bulletSpeed;
+		//reken de laaste keer de travel time uit en daar uit krijg je de positie waar je heen moet schieten
+		pre = enemypos + this.closestEnemy.bewegingsVector * travelTime;
+		
+		this.drawLineTo(this.aimLine, GunPoint.transform.position, pre);
+		return pre;
+	}
+	
+	EnemyBehaviour findClosestEnemy()
+	{
+		//find alle enemy objecten in het spel
+		var enemys = GameObject.FindObjectsOfType<EnemyBehaviour>();
+		if (enemys.Length > 0)
+		{
+			//zet de begin distance op infinity
+			float dist = Mathf.Infinity;
+			//maak variable aan waar we de enemy gaan opslaan die het dichts bij is.
+			EnemyBehaviour closest = null;
+			//loop door de enemys heen
+			for (int i = 0; i < enemys.Length; i++)
+			{
+				//reken de distance uit tussen dit object en de huidige enemy 
+				float curDist = Vector2.Distance(enemys[i].transform.position, GunPoint.transform.position);
+				//is die distance kleiner dan is de enemy dus ook dichter bij.
+				if (curDist < dist)
+				{
+					//zet de closest enemy
+					closest = enemys[i];
+					//zet de nieuwe distance
+					dist = curDist;
+				}
+			}
+			//loop is klaar en return de enemy
+			return closest;
+		}
+		//geen enemy gevonden
+		return null;
+	}
 }
 
