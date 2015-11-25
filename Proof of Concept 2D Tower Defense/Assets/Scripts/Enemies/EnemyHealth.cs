@@ -40,8 +40,8 @@ public class EnemyHealth : MonoBehaviour {
 	void Decreasehealth(){
 		float calculateHealth = enemyCurHealth / maxHealth;
 		SetHealthBar(calculateHealth);
-		if(enemyCurHealth == 0){				
 
+		if(enemyCurHealth <= 0){
 			Destroy(this.gameObject);
 		}
 
