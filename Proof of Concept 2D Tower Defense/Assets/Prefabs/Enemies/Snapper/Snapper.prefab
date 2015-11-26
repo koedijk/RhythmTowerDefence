@@ -46,8 +46,8 @@ GameObject:
   - 212: {fileID: 21214190}
   - 114: {fileID: 11461514}
   - 114: {fileID: 11418004}
-  - 95: {fileID: 9582370}
   - 60: {fileID: 6029536}
+  - 95: {fileID: 9523016}
   m_Layer: 0
   m_Name: Snapper
   m_TagString: Enemy
@@ -204,7 +204,7 @@ PolygonCollider2D:
       - {x: -.899999976, y: -.289999992}
       - {x: -.839999974, y: -.289999992}
       - {x: -.829999983, y: -.300000012}
---- !u!95 &9582370
+--- !u!95 &9523016
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -283,6 +283,7 @@ MonoBehaviour:
   EnemyDamage: 7
   enemyCurHealth: 20
   maxHealth: 20
+  waitSeconds: 2
   healthbar: {fileID: 172582}
 --- !u!114 &11455650
 MonoBehaviour:
@@ -412,6 +413,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waitSeconds
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

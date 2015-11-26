@@ -560,6 +560,7 @@ MonoBehaviour:
   EnemyDamage: 7
   enemyCurHealth: 20
   maxHealth: 20
+  waitSeconds: 2.70000005
   healthbar: {fileID: 110054}
 --- !u!114 &11458556
 MonoBehaviour:
@@ -741,6 +742,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waitSeconds
+      value: 2.70000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

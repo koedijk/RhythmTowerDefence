@@ -9,9 +9,8 @@ public class Bullet : MonoBehaviour
 	private float speed = 15;
 	public float Speed{get{return speed;}set{speed = value;}}
 
-	EnemyHealth enemyHealth;
-	StatsOfObjects stats;
 
+	EnemyHealth enemyHealth;
 
 
 	void Start(){
@@ -25,7 +24,7 @@ public class Bullet : MonoBehaviour
 	{
 		Vector3 movementVector = this.transform.right * (speed * Time.deltaTime);
 		this.transform.position += movementVector;
-		Invoke("killme", 5f);
+		Invoke("killme", 3f);
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

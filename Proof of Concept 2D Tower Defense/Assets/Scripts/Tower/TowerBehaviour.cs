@@ -21,7 +21,6 @@ public class TowerBehaviour : Lines
 	private float delay;
 	void Start()
 	{
-
 		this.closestEnemy = this.findClosestEnemy();
 		this.closestEnemyLine = this.makeLine(Vector2.up, Color.red);
 		this.aimLine = this.makeLine(Vector2.zero, Color.yellow);
@@ -98,7 +97,7 @@ public class TowerBehaviour : Lines
 			for (int i = 0; i < enemys.Length; i++)
 			{
 				//reken de distance uit tussen dit object en de huidige enemy 
-				float curDist = Vector2.Distance(enemys[i].transform.position, this.transform.position);
+				float curDist = Vector2.Distance(enemys[i].transform.position, Gunpoint.transform.position);
 				//is die distance kleiner dan is de enemy dus ook dichter bij.
 				if (curDist < dist)
 				{

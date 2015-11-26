@@ -191,6 +191,7 @@ MonoBehaviour:
   EnemyDamage: 7
   enemyCurHealth: 20
   maxHealth: 20
+  waitSeconds: 1.20000005
   healthbar: {fileID: 156274}
 --- !u!114 &11467206
 MonoBehaviour:
@@ -358,6 +359,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: da879ddee7b27364cb727dd06ca1bf4c,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: waitSeconds
+      value: 1.20000005
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 180260}

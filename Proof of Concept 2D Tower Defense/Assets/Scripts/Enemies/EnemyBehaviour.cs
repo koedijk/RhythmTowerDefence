@@ -8,6 +8,7 @@ public class EnemyBehaviour : Lines
 	public float Speed;
 	public Vector2 bewegingsVector = Vector2.zero;
 
+
 	TowerHealth Tower;
 	//privates
 	private Waypoint targetWaypoint;

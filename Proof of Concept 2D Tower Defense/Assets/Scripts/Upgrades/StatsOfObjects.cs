@@ -12,6 +12,10 @@ public class StatsOfObjects : MonoBehaviour {
 	private float bulletSpeed = 15;
 	public float BulletSpeed{get{return bulletSpeed;}set{bulletSpeed = value;}}
 	// Use this for initialization
+	void Awake(){
+
+	}
+
 	void Start () {
 
 		

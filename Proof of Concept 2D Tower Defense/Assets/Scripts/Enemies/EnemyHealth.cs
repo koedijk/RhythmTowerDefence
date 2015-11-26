@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour {
 	private float enemyCurHealth = 20;
 	[SerializeField]
 	private float maxHealth = 20;
+	public float waitSeconds;
 
 	public float enemyHealth{
 		get
@@ -63,7 +64,7 @@ public class EnemyHealth : MonoBehaviour {
 		healthbar.transform.localScale = new Vector3(myHealth,healthbar.transform.localScale.y,healthbar.transform.localScale.z);
 	}
 	IEnumerator Die(){
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(waitSeconds);
 		Destroy(this.gameObject);
 	}
 }
