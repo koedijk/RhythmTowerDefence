@@ -47,10 +47,11 @@ public class EnemyHealth : MonoBehaviour {
 		SetHealthBar(calculateHealth);
 
 		if(enemyCurHealth <= 1){
-			Destroy(GetComponent<EnemyBehaviour>());
-			Destroy(healthbar);
+			this.Destroy(healthbar);
+			this.Destroy(GetComponent<EnemyBehaviour>());
+			this.Destroy(GetComponent<PolygonCollider2D>());
 			this.animDie.SetBool("Die", true);
-			StartCoroutine(Die());
+			this.StartCoroutine(Die());
 
 			//Destroy();
 		}

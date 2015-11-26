@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class EnemyBehaviour : Lines
 {
 	//public
-	public float Speed = 2;
+	public float Speed;
 	public Vector2 bewegingsVector = Vector2.zero;
 
 	TowerHealth Tower;
@@ -17,6 +17,7 @@ public class EnemyBehaviour : Lines
 	private float delay;
 	void Start()
 	{
+		Speed = Speed + (Random.value) + (Random.value);
 		Tower = GameObject.FindObjectOfType<TowerHealth>();
 		targetWaypoint = this.FindClosestWaypoint();
 		this.movementLine = makeLine(Vector2.zero, Color.green);
@@ -33,15 +34,7 @@ public class EnemyBehaviour : Lines
 		//als de waypoint afstand kleiner is als 0.1 dan haal nieuwe waypoint op
 		if (Vector2.Distance(waypoint.gameObject.transform.position, this.transform.position) < 0.1)
 		{
-			if (delay < 0)
-			{
-				delay = delayTime;
-			}
-			else
-			{
-				delay -= Time.fixedDeltaTime;
-			}
-			//Destroy(this.gameObject);//EnemyDamage();
+
 		}
 		else
 		{
