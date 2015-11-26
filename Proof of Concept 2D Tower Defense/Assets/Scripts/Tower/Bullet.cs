@@ -5,30 +5,27 @@ public class Bullet : MonoBehaviour
 {
 	//snelheid van de kogel
 	[SerializeField]
-	private float bulletDamage = 5;
-	public float BulletDamage{ get{ return bulletDamage; } set{ bulletDamage = value;} } 
+	private float bulletDamage;
+	private float speed = 15;
+	public float Speed{get{return speed;}set{speed = value;}}
 
-
-
-	private float speed = 5;
-	public float Speed{ get{ return speed; }set{ speed = value;} }
 	EnemyHealth enemyHealth;
+	StatsOfObjects stats;
 
 
 
 	void Start(){
-		GameObject objUpgrades = GameObject.Find("UpgradeUI");
-		Upgrades upgrades = objUpgrades.GetComponent<Upgrades>();
-		BulletDamage = upgrades.UpgradeBulletDamage;
-		Speed = upgrades.UpgradeBulletSpeed;
+		GameObject objUpgrades = GameObject.Find("StatsHolder");
+		StatsOfObjects stats = objUpgrades.GetComponent<StatsOfObjects>();
+		bulletDamage = stats.BulletSpeed;
+		Speed = stats.BulletSpeed;
 	}
 
 	void Update()
 	{
-		Vector3 movementVector = this.transform.right * (Speed * Time.deltaTime);
+		Vector3 movementVector = this.transform.right * (speed * Time.deltaTime);
 		this.transform.position += movementVector;
 		Invoke("killme", 5f);
-		Upgrade();
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -49,23 +46,6 @@ public class Bullet : MonoBehaviour
 	{
 		Destroy(this.gameObject);
 	}
-
-	void Upgrade(){
-		GameObject objUpgrades = GameObject.Find("UpgradeUI");
-		Upgrades upgrades = objUpgrades.GetComponent<Upgrades>();
-		if(upgrades.UpgradeDamage == true){
-
-			BulletDamage = upgrades.UpgradeBulletDamage;
-			Debug.Log(bulletDamage);
-			upgrades.UpgradeDamage = false;
-			
-		}
-		if(upgrades.UpgradeSpeed == true){
-
-			Speed = upgrades.UpgradeBulletSpeed;
-			upgrades.UpgradeSpeed = false;
-		}
-
-	}
+	
 }
 

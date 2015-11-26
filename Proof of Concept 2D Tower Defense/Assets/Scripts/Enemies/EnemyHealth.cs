@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class EnemyHealth : MonoBehaviour {
+
+	private Animator animDie;
+
 	[SerializeField]
 	private float EnemyDamage = 7;
 	[SerializeField]
@@ -23,9 +26,11 @@ public class EnemyHealth : MonoBehaviour {
 
 	public GameObject healthbar;
 
+
+
 	// Use this for initialization
 	void Start () {
-
+		animDie = GetComponent<Animator>();
 		enemyCurHealth = maxHealth;
 		InvokeRepeating("Decreasehealth",1f,0.5f);
 	}
@@ -41,8 +46,9 @@ public class EnemyHealth : MonoBehaviour {
 		float calculateHealth = enemyCurHealth / maxHealth;
 		SetHealthBar(calculateHealth);
 
-		if(enemyCurHealth <= 0){
-			Destroy(this.gameObject);
+		if(enemyCurHealth <= 1){
+			animDie.SetBool("Die", true);
+			//Destroy();
 		}
 
 

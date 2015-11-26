@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Upgrades : Bullet {
+public class Upgrades : StatsOfObjects {
 	private float UpdradePrices = 100;
 	public Texture2D Upgrade1,Upgrade2,Upgrade3,Upgrade4;
-	public float UpgradeBulletDamage;
-	public float UpgradeBulletSpeed;
-	public bool UpgradeDamage = false;
-	public bool UpgradeSpeed = false;
+
+	//private GUIStyle testStyle = new GUIStyle();
 
 	void Awake(){
-		UpgradeBulletDamage = BulletDamage;
-		UpgradeBulletSpeed = Speed;
+
 	}
 	void Start () {		
 
@@ -21,20 +18,20 @@ public class Upgrades : Bullet {
 	void Update () {
 	}
 	void OnGUI(){
-
-		if(GUI.Button(new Rect(15,15,Upgrade1.width,Upgrade1.height), Upgrade1)){
-			UpgradeDamage = true;
-			UpgradeBulletDamage += 5;
+		Color c = GUI.backgroundColor;
+		GUI.backgroundColor = Color.clear;
+		if(GUI.Button(new Rect(400,250,Upgrade1.width,Upgrade1.height), Upgrade1)){
+			BulletDamage = +5;
 
 
 		}
-		if(GUI.Button(new Rect(15,90,Upgrade2.width,Upgrade2.height), Upgrade2)){
-			UpgradeSpeed = true;
-			UpgradeBulletSpeed += 5;
+		GUI.backgroundColor = c;
+		if(GUI.Button(new Rect(210,250,Upgrade2.width,Upgrade2.height), Upgrade2)){
+			BulletSpeed = +5;
 			
 		}
-		if(GUI.Button(new Rect(15,165,Upgrade3.width,Upgrade3.height), Upgrade3)){}
-		if(GUI.Button(new Rect(15,235,Upgrade4.width,Upgrade4.height), Upgrade4)){}
+		if(GUI.Button(new Rect(400,410,Upgrade3.width,Upgrade3.height), Upgrade3)){}
+		if(GUI.Button(new Rect(210,410,Upgrade4.width,Upgrade4.height), Upgrade4)){}
 	}
 
 }

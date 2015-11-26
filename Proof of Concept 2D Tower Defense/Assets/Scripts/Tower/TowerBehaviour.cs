@@ -6,22 +6,25 @@ public class TowerBehaviour : Lines
 {
 	//publics
 	public Bullet bullet;
-	public Transform GunPoint;
+	public StatsOfObjects stats;
+	public GameObject Gunpoint;
 	public float delayTime = 1f;
 	//privates
 	
 	//line
 	GameObject closestEnemyLine;
 	GameObject aimLine;
+
 	//enemy
 	EnemyBehaviour closestEnemy;
 	//time
 	private float delay;
 	void Start()
 	{
+
 		this.closestEnemy = this.findClosestEnemy();
 		this.closestEnemyLine = this.makeLine(Vector2.up, Color.red);
-		this.aimLine = this.makeLine(Vector2.up, Color.yellow);
+		this.aimLine = this.makeLine(Vector2.zero, Color.yellow);
 		delay = delayTime;
 	}
 	
@@ -30,7 +33,7 @@ public class TowerBehaviour : Lines
 		//vind de dichts bij zijnde enemy
 		this.closestEnemy = this.findClosestEnemy();
 		//teken een lijn naar de closest enemy in rood
-		drawLineTo(this.closestEnemyLine, GunPoint.transform.position, closestEnemy.transform.position);
+		drawLineTo(this.closestEnemyLine, Gunpoint.transform.position, closestEnemy.transform.position);
 		//bereken de projetile trajectory
 		Vector2 trajectory = calulateTrajectory();
 		if (delay < 0)
@@ -47,7 +50,7 @@ public class TowerBehaviour : Lines
 	void Shoot(Vector2 towards)
 	{
 		//maak nieuwe kogel
-		GameObject tempkogel = (GameObject)Instantiate(bullet.gameObject,GunPoint.transform.position , Quaternion.identity);
+		GameObject tempkogel = (GameObject)Instantiate(bullet.gameObject, Gunpoint.transform.position, Quaternion.identity);
 		//reken de hoek uit
 		float angle = VectorMath.CartesianToPolar(towards).x;
 		//draai de kogel
@@ -59,10 +62,10 @@ public class TowerBehaviour : Lines
 		//haal de enemey positie op
 		Vector2 enemypos = this.closestEnemy.transform.position;
 		//reken de kogel snelheid uit
-		float bulletSpeed = bullet.Speed * Time.fixedDeltaTime;
+		float bulletSpeed = stats.BulletSpeed * Time.fixedDeltaTime;
 		//berekend de afstand van de enemy
 		//dit is a*a+b*b=c(dus pythagoras)
-		float enemyDist = Vector2.Distance(GunPoint.transform.position, enemypos);
+		float enemyDist = Vector2.Distance(Gunpoint.transform.position, enemypos);
 		//reken uit hoelang het duurt voor dat de kogel bij de enemy is
 		//time=distance/speed
 		float travelTime = enemyDist / bulletSpeed;
@@ -71,13 +74,13 @@ public class TowerBehaviour : Lines
 		Vector2 pre = enemypos + this.closestEnemy.bewegingsVector * travelTime;
 		
 		//doe de zelfde berekening maar dan met de nieuwe positie
-		enemyDist = Vector2.Distance(GunPoint.transform.position, pre);
+		enemyDist = Vector2.Distance(Gunpoint.transform.position, pre);
 		//reken de nieuwe adstand uit
 		travelTime = enemyDist / bulletSpeed;
 		//reken de laaste keer de travel time uit en daar uit krijg je de positie waar je heen moet schieten
 		pre = enemypos + this.closestEnemy.bewegingsVector * travelTime;
 		
-		this.drawLineTo(this.aimLine, GunPoint.transform.position, pre);
+		this.drawLineTo(this.aimLine, Gunpoint.transform.position, pre);
 		return pre;
 	}
 	
@@ -95,7 +98,7 @@ public class TowerBehaviour : Lines
 			for (int i = 0; i < enemys.Length; i++)
 			{
 				//reken de distance uit tussen dit object en de huidige enemy 
-				float curDist = Vector2.Distance(enemys[i].transform.position, GunPoint.transform.position);
+				float curDist = Vector2.Distance(enemys[i].transform.position, this.transform.position);
 				//is die distance kleiner dan is de enemy dus ook dichter bij.
 				if (curDist < dist)
 				{

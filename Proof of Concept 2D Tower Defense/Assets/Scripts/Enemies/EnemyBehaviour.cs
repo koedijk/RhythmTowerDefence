@@ -8,7 +8,6 @@ public class EnemyBehaviour : Lines
 	public float Speed = 2;
 	public Vector2 bewegingsVector = Vector2.zero;
 
-
 	TowerHealth Tower;
 	//privates
 	private Waypoint targetWaypoint;
@@ -37,7 +36,6 @@ public class EnemyBehaviour : Lines
 			if (delay < 0)
 			{
 				delay = delayTime;
-				EnemyAttack();
 			}
 			else
 			{
@@ -93,9 +91,6 @@ public class EnemyBehaviour : Lines
 		}
 		//geen enemy gevonden
 		return null;
-	}
-	void EnemyAttack(){
-		Tower.Health -= EnemyDamage;
 	}
 	
 }

@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - 1
-  - 
+  - Tower
   - 
   - 
   - 
@@ -44,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tower
+    uniqueID: 1214242519
+    locked: 0
+  - name: Ui
+    uniqueID: 3827180877
     locked: 0
