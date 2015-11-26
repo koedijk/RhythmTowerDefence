@@ -90,7 +90,7 @@ Animator:
   m_GameObject: {fileID: 197044}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d6d48b651ea5ad0459abb4cffb034576, type: 2}
+  m_Controller: {fileID: 9100000, guid: f1ccc6be961d5a64eb0fd428e3c82696, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -157,7 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f00eb511f95584da58cd8fd53f0ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animDie: {fileID: 0}
   EnemyDamage: 7
   enemyCurHealth: 20
   maxHealth: 20
@@ -282,7 +281,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f1ccc6be961d5a64eb0fd428e3c82696, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 197044}

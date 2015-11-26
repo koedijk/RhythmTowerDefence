@@ -47,7 +47,11 @@ public class EnemyHealth : MonoBehaviour {
 		SetHealthBar(calculateHealth);
 
 		if(enemyCurHealth <= 1){
-			animDie.SetBool("Die", true);
+			Destroy(GetComponent<EnemyBehaviour>());
+			Destroy(healthbar);
+			this.animDie.SetBool("Die", true);
+			StartCoroutine(Die());
+
 			//Destroy();
 		}
 
@@ -56,5 +60,9 @@ public class EnemyHealth : MonoBehaviour {
 	public void SetHealthBar(float myHealth){
 		//myHealth value 0-1 , 
 		healthbar.transform.localScale = new Vector3(myHealth,healthbar.transform.localScale.y,healthbar.transform.localScale.z);
+	}
+	IEnumerator Die(){
+		yield return new WaitForSeconds(2);
+		Destroy(this.gameObject);
 	}
 }
